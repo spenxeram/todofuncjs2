@@ -1,0 +1,12 @@
+* {
+  opacity: 1;
+  transition: opacity 300ms;
+}
+
+.row {
+    min-height: 80px;
+}
+
+.alert-wrapper {
+  display: none;
+}
