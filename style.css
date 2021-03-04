@@ -7,6 +7,10 @@
     min-height: 80px;
 }
 
-.alert-wrapper {
-  display: none;
+.alert {
+  opacity: 0;
+}
+
+.alert-area {
+  min-height: 65px;
 }
