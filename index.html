@@ -20,7 +20,7 @@
   <div class="container-fluid">
     <div class="row">
 
-        <div class="col-md-6 offset-md-3 alert-area mt-2 mb-2">
+        <div class="col-md-8 offset-md-2 alert-area mt-3">
           <div class="alert alert-success" role="alert">
           </div>
         </div>
@@ -35,7 +35,7 @@
         <form action="index.html" method="GET" id="task-form">
           <fieldset class="form-group">
           <label for="task"><i class="far fa-check-circle mr-1"></i> Task</label>
-          <input type="text" class="form-control" id="task" Taskplaceholder="Input your task...">
+          <input type="text" class="form-control" id="task" placeholder="Input your task...">
           </fieldset>
           <fieldset class="form-group">
             <label for="type"><i class="fas fa-cogs"></i> Type of Task</label>
@@ -64,10 +64,19 @@
           <tbody>
             <tr>
               <td scope="row"><i class="fas fa-cogs"></i></td>
-              <td>Takes CS201 Final exam.... someday</td>
+              <td class="task-text">Take CS201 Final exam.... someday</td>
               <td><input type="checkbox" class="check-completed"></td>
             </tr>
-
+            <tr>
+              <td scope="row"><i class="fas fa-book"></i></td>
+              <td class="task-text">Read Machine Learning 101</td>
+              <td><input type="checkbox" class="check-completed"></td>
+            </tr>
+            <tr>
+              <td scope="row"><i class="fas fa-atlas"></i></td>
+              <td class="task-text">Enroll in Statistics using R on Coursera</td>
+              <td><input type="checkbox" class="check-completed"></td>
+            </tr>
           </tbody>
         </table>
       </div>
@@ -83,13 +92,26 @@
           </thead>
           <tbody>
             <tr>
-              <td scope="row"><i class="fas fa-cogs"></i></td>
-              <td>Takes CS201 Final exam.... someday</td>
+              <td scope="row">2021-03-05</td>
+              <td>Study for final exam. </td>
+              <td><button type="button" class="btn btn-outline-danger btn-small delete-task">X</button></td>
+            </tr>
+            <tr>
+              <td scope="row">2021-04-06</td>
+              <td>Meet friends for study session</td>
+              <td><button type="button" class="btn btn-outline-danger btn-small delete-task">X</button></td>
+            </tr>
+            <tr>
+              <td scope="row">2021-06-06</td>
+              <td>Watch Youtube tutorial on Laravel Intro</td>
               <td><button type="button" class="btn btn-outline-danger btn-small delete-task">X</button></td>
             </tr>
 
           </tbody>
         </table>
+
+          <button type="button" class="mt-2 mb-5 btn btn-danger btn-block delete-all">Remove All</button>
+
       </div>
     </div>
   </div>

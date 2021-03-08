@@ -1,6 +1,7 @@
 // get elements
 let taskform = document.querySelector("#task-form");
 let taskstable = document.querySelector("table.new-tasks");
+let completedtable = document.querySelector("table.completed-tasks");
 
 let icons = [
   "<i class='fas fa-cogs'></i>",
@@ -8,7 +9,6 @@ let icons = [
   "<i class='far fa-file-alt'></i>",
   "<i class='fas fa-atlas'></i>"
 ];
-console.log(icons[2]);
 // on page load Tasks
 let task = {};
 
@@ -21,11 +21,17 @@ taskform.addEventListener("submit", (e) => {
 taskstable.addEventListener("change", (e) => {
   console.log(e);
   console.log(e.target);
-  e.target.closest("tr").remove();
+  taskCompleted(e.target);
+});
+
+completedtable.addEventListener("click", (e) => {
+  if(e.target.classList.contains("delete-task")) {
+    removeCompletedTask(e.target);
+  }
 })
 
+// General Functions for adding, moving and removing To-Dos
 
-// general functions
 function getTask() {
   let thetask = document.querySelector("#task");
   let thetype = document.querySelector("#type");
@@ -36,7 +42,6 @@ function getTask() {
   console.log(task);
   createNewTask();
   thetask.value = "";
-  thetask.setAttribute("placeholder", "Add a new task...")
 }
 
 function createNewTask() {
@@ -44,14 +49,37 @@ function createNewTask() {
   let newrow = tasktable.insertRow();
   let output = `
       <td> ${icons[task.type]} </td>
-      <td> ${task.task} </td>
+      <td class="task-text"> ${task.task} </td>
       <td><input type="checkbox" class="check-completed"></td>
   `;
-
   newrow.innerHTML = output;
-  alertUser("success", "New task added, GANBATE BANZAI!")
-
+  alertUser("primary", "New task added, GANBATE BANZAI!")
 }
+function removeCompletedTask(el) {
+  let therow = el.closest("tr");
+  fadeOut(therow, true);
+  alertUser("danger", "Completed task removed!");
+}
+
+function taskCompleted(task) {
+  let row = task.closest("tr")
+  let tasktext = row.querySelector(".task-text").textContent;
+  fadeOut(row, true);
+  createCompletedTask(tasktext);
+}
+
+function createCompletedTask(tasktext) {
+  let newrow = completedtable.insertRow();
+  let thetime = new Date().toISOString().split('T')[0];
+  let output = `
+      <td> ${thetime} </td>
+      <td class="task-text"> ${tasktext} </td>
+      <td><button type="button" class="btn btn-outline-danger btn-small delete-task">X</button></td>
+  `;
+  newrow.innerHTML = output;
+  alertUser("success", "Great work!");
+}
+
 
 function alertUser(theclass, msg) {
   let thealert = document.querySelector(".alert");
@@ -60,7 +88,7 @@ function alertUser(theclass, msg) {
   thealert.style.opacity = "1";
   setTimeout(()=> {
     thealert.style.opacity = "0";
-  }, 3000)
+  }, 2000);
 }
 
 // helper functions
@@ -70,12 +98,16 @@ function fadeIn(el) {
   el.style.display = "initial";
   setTimeout(function() {
     el.style.opacity = "1";
-  }, 10)
+  }, 10);
 }
 
-function fadeOut(el) {
+function fadeOut(el,remove = false) {
   el.style.opacity = "0";
   setTimeout(function() {
-    el.style.display = "none";
-  }, 300)
+    if(remove = true) {
+      el.remove();
+    } else {
+      el.style.display = "none";
+    }
+  }, 300);
 }
