@@ -2,7 +2,7 @@
 let taskform = document.querySelector("#task-form");
 let taskstable = document.querySelector("table.new-tasks");
 let completedtable = document.querySelector("table.completed-tasks");
-
+let deleteallbtn = document.querySelector(".delete-all");
 let icons = [
   "<i class='fas fa-cogs'></i>",
   "<i class='fas fa-edit'></i>",
@@ -13,7 +13,7 @@ let icons = [
 let task = {};
 
 // event listeners
-
+deleteallbtn.addEventListener("click", deleteAll);
 
 taskstable.addEventListener("change", (e) => {
   console.log(e);
@@ -30,7 +30,18 @@ completedtable.addEventListener("click", (e) => {
 // General Functions for adding, moving and removing To-Dos
 
 // Delete All function
+function deleteAll() {
+  console.log("delete");
+  let therows = completedtable.querySelectorAll("tbody tr");
+  console.log(therows);
+  therows.forEach((item, i) => {
+    setTimeout(function() {
+      fadeOut(item, true)
+    }, (i * 300));
+  });
 
+
+}
 
 function getTask() {
   let thetask = document.querySelector("#task");
